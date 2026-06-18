@@ -87,7 +87,7 @@ textarea:focus{border-color:var(--purple);}
   <div class="father-avatar">👨</div>
   <div class="father-info">
     <div class="father-label">Message for</div>
-    <div class="father-name" id="fatherName">Loading...</div>
+    <div class="father-name" id="fatherName"></div>
     <div class="father-id" id="fatherId"></div>
   </div>
 </div>
@@ -149,7 +149,7 @@ textarea:focus{border-color:var(--purple);}
 <script>
 const params = new URLSearchParams(window.location.search);
 const FATHER_ID = params.get('id') || '';
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzARzW6nQ-z_kirdbuIROI2q-9Yz_fMwC0kdktLQyIsRsQKfLgccEWpfPJ5JMxz7C3lEw/exec';
+const PREFIX = 'fd2026_';
 
 const FATHERS = {
   '21000151': {name:'Ali Hassan Ahmed Al Abd rab AlRida', empId:'21000151'},
@@ -194,8 +194,13 @@ const FATHERS = {
 };
 
 const father = FATHERS[FATHER_ID] || {name:'Unknown', empId:FATHER_ID};
-document.getElementById('fatherName').textContent = father.name;
-document.getElementById('fatherId').textContent = 'Employee · ' + father.empId;
+// Set name immediately
+(function(){
+  const nameEl = document.getElementById('fatherName');
+  const idEl   = document.getElementById('fatherId');
+  if(nameEl) nameEl.textContent = father.name;
+  if(idEl)   idEl.textContent   = 'Employee · ' + father.empId;
+})();
 
 document.getElementById('msgText').addEventListener('input', function(){
   document.getElementById('charCount').textContent = this.value.length;
@@ -232,29 +237,23 @@ function removeImage(e){
   document.getElementById('uploadPrompt').style.display = 'block';
 }
 
-async function submitMessage(){
+function submitMessage(){
   const text = document.getElementById('msgText').value.trim();
   if(!text && !imageData){showToast('Please write a message or add a photo',true);return;}
   const btn = document.getElementById('submitBtn');
   btn.disabled = true; btn.textContent = 'Sending...';
   try{
     const payload = {
-      fatherId:   FATHER_ID,
-      fatherName: father.name,
-      message:    text,
-      image:      imageData || ''
+      message: text,
+      image:   imageData || ''
     };
-    const res = await fetch(SCRIPT_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if(data.success){
-      document.getElementById('formWrap').style.display = 'none';
-      document.getElementById('successState').classList.add('visible');
-    } else {
-      throw new Error('Server error');
-    }
+    const key = PREFIX + FATHER_ID;
+    let msgs = [];
+    try { const existing = localStorage.getItem(key); if(existing) msgs = JSON.parse(existing); } catch(e){}
+    msgs.push({message: payload.message, image: payload.image, timestamp: new Date().toISOString()});
+    localStorage.setItem(key, JSON.stringify(msgs));
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successState').classList.add('visible');
   }catch(err){
     showToast('Something went wrong. Please try again.',true);
     btn.disabled=false; btn.textContent='Send with Love 💛';
@@ -274,13 +273,13 @@ function resetForm(){
   document.getElementById('submitBtn').textContent='Send with Love 💛';
 }
 
-async function loadMessages(){
+function loadMessages(){
   const container = document.getElementById('messagesContainer');
   container.innerHTML = '<div class="loading"><div class="spinner"></div>Loading your messages...</div>';
   try{
-    const res = await fetch(SCRIPT_URL + '?fatherId=' + FATHER_ID);
-    const data = await res.json();
-    const msgs = data.messages || [];
+    const key = PREFIX + FATHER_ID;
+    let msgs = [];
+    try { const existing = localStorage.getItem(key); if(existing) msgs = JSON.parse(existing); } catch(e){}
     if(msgs.length===0){
       container.innerHTML = '<div class="no-messages"><div class="icon">💌</div><p>No messages yet.<br>Your loved ones\'s messages will appear here.</p></div>';
       return;
