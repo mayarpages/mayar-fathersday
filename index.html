@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mayar Father's Day</title>
+<title>MayarA Father's Day</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
 :root{--gold:#C4A800;--gold-light:#F5E96A;--purple:#7B4FA6;--green:#5BAD6F;--dark:#1A1A2E;--cream:#FFFDF5;--text:#2D2D2D;--subtle:#888;--radius:18px;}
@@ -148,16 +148,52 @@ textarea:focus{border-color:var(--purple);}
 
 <script>
 const params = new URLSearchParams(window.location.search);
-const FATHER_ID = params.get('id') || 'demo';
+const FATHER_ID = params.get('id') || '';
 const PREFIX = 'fd2026_';
 
 const FATHERS = {
-  'demo': {name:'Ahmed Al-Rashid', empId:'21000001'},
-  'F001': {name:'Mohammed Al-Farsi', empId:'21000501'},
-  'F002': {name:'Ibrahim Al-Obaidan', empId:'21000387'},
+  '21000151': {name:'Ali Hassan Ahmed Al Abd rab AlRida', empId:'21000151'},
+  '21000165': {name:'AHMED SULAIMAN A ALMUHAIDIB', empId:'21000165'},
+  '21000172': {name:'Omer Alhussaini', empId:'21000172'},
+  '21000191': {name:'Omar Abdullah Al Awadh', empId:'21000191'},
+  '21000427': {name:'Hasan Ali Albarqiy', empId:'21000427'},
+  '21000523': {name:'MOHAMMED ABDULRAZZAK M ALDUBAIKEL', empId:'21000523'},
+  '21000665': {name:'Waqas Tariq', empId:'21000665'},
+  '21000772': {name:'Fahad Ali A. AlShubayli', empId:'21000772'},
+  '21000886': {name:'Muhammad Umer', empId:'21000886'},
+  '21000908': {name:'Hussain Abdulkarim AlFadhel', empId:'21000908'},
+  '21000932': {name:'Abdulaziz Aldakhail', empId:'21000932'},
+  '21000950': {name:'Mohammed Ahmed Mohammed Mahjub', empId:'21000950'},
+  '21000968': {name:'Rahmat Muhammad Rafique Ali', empId:'21000968'},
+  '21001016': {name:'Ahmed Mazhar', empId:'21001016'},
+  '21001059': {name:'Ali Raza', empId:'21001059'},
+  '21001148': {name:'Ali Abdulsattar Alhajjimohammed', empId:'21001148'},
+  '21001210': {name:'Ali Raza Shaikh', empId:'21001210'},
+  '21001211': {name:'Nazem Ahmed Alsaleem', empId:'21001211'},
+  '21001223': {name:'Abdulrahman Ahmed Alhumaidi', empId:'21001223'},
+  '21001226': {name:'Bader Hamed Albishri', empId:'21001226'},
+  '21001230': {name:'Basim Yahya Tashkandi', empId:'21001230'},
+  '21001255': {name:'Ziad Ali', empId:'21001255'},
+  '21001262': {name:'Abdullah Fouad Eragi', empId:'21001262'},
+  '21001290': {name:'Abdulwahab', empId:'21001290'},
+  '21001302': {name:'Abdullah AlRayes', empId:'21001302'},
+  '21001314': {name:'Fawaz AlNahdi', empId:'21001314'},
+  '21001329': {name:'Mudhaffer Mahbub', empId:'21001329'},
+  '21001380': {name:'Fareed Abdulmuhsain Aljeyan', empId:'21001380'},
+  '21001385': {name:'Eslam Saadulden', empId:'21001385'},
+  '21001429': {name:'Mohammed Salem Musa', empId:'21001429'},
+  '21001436': {name:'Mohammed AlSane', empId:'21001436'},
+  '21001460': {name:'Ghurmullah Saeed AlZahrani', empId:'21001460'},
+  '21001473': {name:'Hashmi Dawood', empId:'21001473'},
+  '21001525': {name:'Mamoonur Rashid Shafique', empId:'21001525'},
+  '21001530': {name:'Abdul Haseeb Rafique', empId:'21001530'},
+  '21001532': {name:'Abdullah Bu Khamseen', empId:'21001532'},
+  '21001543': {name:'Bassem Gamal Khalil', empId:'21001543'},
+  '21001573': {name:'Muhammed Magdi Muhtady', empId:'21001573'},
+  '21001607': {name:'Abdulaziz Badwilan', empId:'21001607'},
 };
 
-const father = FATHERS[FATHER_ID] || {name:'Father', empId:FATHER_ID};
+const father = FATHERS[FATHER_ID] || {name:'Unknown', empId:FATHER_ID};
 document.getElementById('fatherName').textContent = father.name;
 document.getElementById('fatherId').textContent = 'Employee · ' + father.empId;
 
