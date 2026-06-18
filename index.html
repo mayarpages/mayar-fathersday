@@ -73,6 +73,10 @@ textarea:focus{border-color:var(--purple);}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast.error{background:#C0392B;}
 .footer{text-align:center;padding:20px;font-size:11px;color:#BBB;}
+.explanation-box{background:#fff;border-radius:14px;padding:20px 22px;margin-bottom:22px;border-left:4px solid var(--gold);box-shadow:0 2px 10px rgba(0,0,0,0.06);font-size:13px;line-height:1.8;color:var(--text);}
+.explanation-box p{margin-bottom:0;}
+.explanation-box strong{color:var(--purple);}
+.exp-divider{border:none;border-top:1px solid #E8E4DC;margin:14px 0;}
 </style>
 </head>
 <body>
@@ -93,7 +97,16 @@ textarea:focus{border-color:var(--purple);}
 </div>
 
 <div class="container">
-  <div class="tabs">
+  <div class="explanation-box">
+  <p lang="ar" dir="rtl">في يوم الأب العالمي، خصص لحظة مميزة مع عائلتك.<br>
+  شاركهم رمز الـ QR ليكتبوا لك رسائل تعبر عن محبتهم وامتنانهم، ثم استمتعوا بقراءة الرسائل معًا وصناعة ذكرى جميلة لا تُنسى!<br><br>
+  <strong>تنبيه:</strong> يتم الدخول من جهاز واحد فقط، حيث يؤدي الدخول من أكثر من جهاز إلى حذف الرسائل تلقائيًا.</p>
+  <hr class="exp-divider"/>
+  <p>This Father's Day, take a special moment with your family.<br>
+  Share the QR code so your loved ones can write heartfelt messages expressing their love and appreciation for you, then enjoy reading the messages together and creating a beautiful memory!<br><br>
+  <strong>Note:</strong> Please access the session from one device only. Logging in from multiple devices will automatically delete the messages.</p>
+</div>
+<div class="tabs">
     <button class="tab-btn active" id="tabSend" onclick="switchTab('send')">💌 Send a Message</button>
     <button class="tab-btn" id="tabView" onclick="switchTab('view')">🎁 View Messages</button>
   </div>
